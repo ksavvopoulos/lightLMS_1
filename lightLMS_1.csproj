@@ -57,7 +57,7 @@
     <None Include="Pages\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{ceb21f0c-5f5f-4098-b618-332425d3da26}</SharePointProjectItemId>
     </None>
-    <None Include="Register iSpring\SharePointProjectItem.spdata">
+    <None Include="Register_iSpring\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{2ee42d22-a3e0-42d9-905d-b999f6b71e92}</SharePointProjectItemId>
     </None>
     <None Include="Scripts\SharePointProjectItem.spdata">
@@ -67,7 +67,7 @@
     <Content Include="Images\Elements.xml" />
     <Content Include="Pages\Elements.xml" />
     <Content Include="Pages\Register.aspx" />
-    <Content Include="Register iSpring\Elements.xml">
+    <Content Include="Register_iSpring\Elements.xml">
       <OpcRelationship>feature-elementmanifest</OpcRelationship>
     </Content>
     <Content Include="Scripts\cancelXhr.js" />

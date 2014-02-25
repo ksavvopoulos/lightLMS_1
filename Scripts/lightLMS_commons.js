@@ -44,7 +44,7 @@ function initApp () {
 				// now we have all the params, do jobs!
 				if (action === "rf_ispr"){
 					// Register File iSpring (rf_ispr)
-					registerIspring();
+					// something went wrong, for iSpring register we have th register.aspx
 				}
 				else if (action === "sd_ispr"){
 					// Save Data from iSpring quiz (sd_ispr)
@@ -60,86 +60,11 @@ function initApp () {
 		}, 
 		function() { alert ("something went wrong creating list: " + app_MainListName ); }		
 	); 
-	/*
-	checkCustomActionExistsOrCreate(
-		app_CustomAction_RegisterFolder,
-		addCA_RegisterFolder,
-		function() { 
-			alert ("success adding custom action: " + app_CustomAction_RegisterFolder );
-		}, 
-		function() { alert ("adding custom action failed: " + app_CustomAction_RegisterFolder ); }			
-	);
-	*/
+	
 }
 
 // ----------------------------------- Init ends ----------------------------------------------------------- 
 // ---------------------------------------------------------------------------------------------------------
-
-function registerIspring() {
-	var oldUrlStr, newUrlStr, requestWatchIspringCode, defineRedirectUrlCode, fullCodeString;
-	/* requestWatchIspringCode: this is the js code to attach to the aspx file we will create for iSpring test to run
-	 * This code stops XMLHttpRequests from sending quiz results to a server, 
-	 * and instead it redirects to this app url with all data from iSpring into the queryString 
-	 * SOS we need to add a string definition for our app's Url, 
-	 * but requestWatchIspringCode is a standard string, so we use two code strings
-	 */
-	requestWatchIspringCode = "XMLHttpRequest.prototype.oldSend=XMLHttpRequest.prototype.send;var newSend=function(postBody){var xhr=this;h_log('intercepted SEND: '+postBody);var onload=function(){h_log('intercepted repsonse: '+xhr.status+' - '+xhr.responseText);};var onerror=function(){h_log('intercepted response error: '+xhr.status);}; xhr.addEventListener('load',onload,false); xhr.addEventListener('error',onerror,false);postBody=buildQueryString(postBody,'rt','-'); postBody=buildQueryString(postBody,'dr','-'); h_log(postBody);window.open(redirectUrl +'&'+postBody,'_blank');};XMLHttpRequest.prototype.send=newSend; function buildQueryString(str,param,val){var ind=-1,attached='';var param_array=str.substring(ind+1).split('&');var params={};var theLength=param_array.length;for(var i=0;i<theLength;i++){var x=param_array[i].toString().split('=');params[x[0]]=x[1];} params[param]=val;for(var key in params){attached+=key+'='+params[key]+'&';}attached=attached.substr(0,attached.length-1);return String(str.substr(0,ind)+attached);} function h_log(what){console.log(what);}";
-	/* now we built the url to be redirected when user finishes the quiz
-	*  The code in requestWatchIspringCode will redirect the iSpring quiz to this url
-	*/
-	// get current url without params
-	oldUrlStr = window.location.href.split('?')[0]; 
-	// the action will be to save quiz data returning from iSpring test
-	newUrlStr = buildUrlParamsString(oldLocation, "action", "sd_ispr");
-	// add next two params from the current urlParams object
-	newUrlStr = buildUrlParamsString(newUrlStr, "SPHostUrl", queryParams.SPHostUrl);
-	newUrlStr = buildUrlParamsString(newUrlStr, "SPAppWebUrl", queryParams.SPAppWebUrl);
-	defineRedirectUrlCode = "var redirectUrl='" + newUrlStr +"';";
-	// concat the two strings into one
-	fullCodeString = defineRedirectUrlCode + requestWatchIspringCode;
-		
-	$.when(getBinaryDataFile (queryParams.relativeFileUrl)).then(
-		function (data) {
-			// we have the index.html in binary in data
-			say ("we got BinaryDataFile! ");
-			var fileBody;
-			fileBody = data.substring(0,data.lastIndexOf("</script>"));
-			fileBody += "</script><script>" +
-						fullCodeString +
-						"</script></body></html>";
-			say ("new fileBody: " + fileBody);
-			burnNewFile(fileBody, relativeFileUrl);			
-		},
-		function (error) {
-			say("error getting BinaryDataFile " + err);							
-		} 
-	);	
-}
-
-function getBinaryDataFile (relativeFileUrl) {
-	// code to get the file binary data with rest 
-	// study: http://techmikael.blogspot.gr/2013/07/how-to-copy-files-between-sites-using.html
-	
-	var defer = new $.Deferred(),
-		executor = new SP.RequestExecutor(appUrl),	
-		restReqUrl = "_api/SP.AppContextSite(@target)/web/GetFileByServerRelativeUrl('" + 
-						relativeFileUrl + "')/$value?@target='" + hostUrl + "'",			
-		info = {
-		    url: restReqUrl,
-		    method: "GET",
-		    binaryStringResponseBody: true,
-		    success: function (data) {
-		        //binary data available in data.body
-		        defer.resolve(data.body);
-		    },
-		    error: function (err) {
-		        defer.reject(JSON.stringify(err));
-		    }
-		};
-		
-	executor.executeAsync(info);	
-	return defer.promise();	
-}
 
 function saveIspring() {
 	/* iSpring data:
@@ -250,73 +175,7 @@ function onQueryFailed_Generic(sender, args) {
 	alert('Sorry, query failed: ' + args.get_message() + '\nstackTrace: ' + args.get_stackTrace());  
 } 
 
-// ----------------------------------- Custom Action functions ----------------------------------------------------------- 
-function checkCustomActionExistsOrCreate (actionName, createFn, okFn, errFn){
-	var actionObj = { "Title":actionName };
-			
-	spyreqs.jsom.checkHostList(actionObj).then(
-		function(listExistsBool) 
-		{
-			//doSomething with the list Exists Boolean
-			if (listExistsBool) { okFn(); }
-			else {
-				say ("creating list: " + actionName);
-				createFn(okFn, errFn);
-			}					
-		},
-		function(error)
-		{
-			alert('checkHostList request failed. ' + error.args.get_message() + '\n' + error.args.get_stackTrace() );
-		}
-	);		
-}
-
-function addCA_RegisterFolder()
-{
-	// study: http://www.instantquick.com/index.php/category/elumenotion-blog-archive/sharepoint-2013-and-office-365-apps
-	var context; 
-    var factory; 
-    var appContextSite; 
- 
-    context = new SP.ClientContext(appweburl); 
-    factory = new SP.ProxyWebRequestExecutorFactory(appweburl); 
-    context.set_webRequestExecutorFactory(factory); 
-    appContextSite = new SP.AppContextSite(context, hostweburl); 
- 
-	var action = appContextSite.get_web().get_userCustomActions().add();
-	action.set_location("ScriptLink");
-	action.set_sequence(100);
-	action.set_scriptBlock("alert('Running!');");	
-	action.update();
-
-	context.executeQueryAsync(function(){alert('worked');},function(){alert('did not work');});
-
-	return false;
-}
-
-function removeAction()
-{
-	var context; 
-    var factory; 
-    var appContextSite; 
-	
-	context = new SP.ClientContext(appweburl); 
-    factory = new SP.ProxyWebRequestExecutorFactory(appweburl); 
-    context.set_webRequestExecutorFactory(factory); 
-    appContextSite = new SP.AppContextSite(context, hostweburl);
-	
-	appContextSite.get_web().get_userCustomActions().clear();	
-	context.executeQueryAsync(function(){alert('worked');},function(){alert('did not work');});
-	return false;
-}
-
 // ----------------------------------- DEMO functions ----------------------------------------------------------- 
-function addSampleItem(){	
-	spyreqs.jsom.addHostListItem(app_MainListName, {"user_id":733, "test_id":33, "score":90}).then(
-		function(itemId) { alert("item was added, id:"+itemId); },
-		function(error) { alert('addHostListItem request failed. ' +  error.args.get_message() + '\n' + error.args.get_stackTrace() ); }
-	);
-}
 
 function getHostLists() {
 	var context, factory, appContextSite, collList;
