@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <CustomAction Id="74658445-a146-4a7d-a69e-110a13a084a7.Register iSpring"
+                RegistrationType="FileType"
+                RegistrationId="html"
+                Location="EditControlBlock"
+                Sequence="10001"
+                Title="Register">
+    <!-- 
+    Update the Url below to the page you want the custom action to use.
+    Start the URL with the token ~remoteAppUrl if the page is in the
+    associated web project, use ~appWebUrl if page is in the app project.
+    -->
+    <UrlAction Url="~appWebUrl/Pages/Register.aspx?{StandardTokens}&amp;SPListItemId={ItemId}&amp;SPListId={ListId}&amp;ItemUrl={ItemUrl}" />
+  </CustomAction>
+</Elements>

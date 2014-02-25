@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package dslVersion="1.0.0.0" 
+        Id="1d940a01-e4cb-446a-b328-25e8cc901322" 
+        solutionId="1d940a01-e4cb-446a-b328-25e8cc901322" 
+        xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel" 
+        name="lightLMS_1"
+        sharePointProductVersion="15.0">
+  <features>
+        <featureReference itemId="27be7ec2-48c0-4a94-9fea-42d86bbc2e92" />
+  </features>
+</package>
