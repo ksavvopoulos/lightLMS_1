@@ -7,6 +7,6 @@
     <File Path="Scripts\WP_App.js" Url="Scripts/WP_App.js" ReplaceContent="TRUE" />
     <File Path="Scripts\_references.js" Url="Scripts/_references.js" ReplaceContent="TRUE" />
     <File Path="Scripts\register.js" Url="Scripts/register.js" ReplaceContent="TRUE" />
-    <File Path="Scripts\cancelXhr.js" Url="Scripts/cancelXhr.js" ReplaceContent="TRUE" />
+    <File Path="Scripts\cancelXhr.txt" Url="Scripts/cancelXhr.txt" ReplaceContent="TRUE" />
   </Module>
 </Elements>

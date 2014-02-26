@@ -70,7 +70,7 @@
     <Content Include="Register_iSpring\Elements.xml">
       <OpcRelationship>feature-elementmanifest</OpcRelationship>
     </Content>
-    <Content Include="Scripts\cancelXhr.js" />
+    <Content Include="Scripts\cancelXhr.txt" />
     <Content Include="Scripts\Elements.xml" />
   </ItemGroup>
   <ItemGroup>
