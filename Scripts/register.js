@@ -28,7 +28,7 @@
         newUrlStr = newUrlStr + "?action=sd_ispr";
         // add next two params from the current urlParams object
         newUrlStr = newUrlStr + "&SPHostUrl=" + queryParams.SPHostUrl +
-                                "&SPAppWebUrl" + queryParams.SPAppWebUrl;
+                                "&SPAppWebUrl=" + queryParams.SPAppWebUrl;
         return "var redirectUrl='" + newUrlStr + "';";
     }
     

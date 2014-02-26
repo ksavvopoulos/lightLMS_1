@@ -15,11 +15,11 @@
 	<link rel="Stylesheet" type="text/css" href="../Content/App.css" />
 			
 	<!-- Common LMS JavaScript functions -->
-	<script type="text/javascript" src="../Scripts/spyreqs.js"></script>
+	 <script type="text/javascript" src="../Scripts/spyreqs.js"></script>
 	<script type="text/javascript" src="../Scripts/lightLMS_commons.js"></script>
-
 	<!-- LMS Application JavaScript -->
 	<script type="text/javascript" src="../Scripts/App.js"></script>
+
 </asp:Content>
 
 <%-- The markup in the following Content element will be placed in the TitleArea of the page --%>
