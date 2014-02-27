@@ -1,27 +1,25 @@
-XMLHttpRequest.prototype.oldSend = XMLHttpRequest.prototype.send;
-var newSend = function (postBody) {
+function XMLHttpRequest(){
+    this.status = 200;
+    this.readyState = 4;
+    this.open=function(){};
+    this.onreadystatechange=function(){};
+	this.responseText = "";
+	this.response = "";
+	this.setRequestHeader=function(){};
+	this.statusText = "200 OK";
+}
+
+XMLHttpRequest.prototype.send = function (postBody) {
     var xhr = this;
-    var onload = function () {
-        h_log('intercepted repsonse: ' + xhr.status + ' - ' + xhr.responseText);
-    };
-    var onerror = function () {
-        h_log('intercepted response error: ' + xhr.status);
-    };
-    xhr.addEventListener('load', onload, false);
-    xhr.addEventListener('error', onerror, false);
     // clear rt and dr values cause they are large xmls...
     postBody = buildQueryString(postBody, 'rt', '-');
     postBody = buildQueryString(postBody, 'dr', '-');
     h_log("queryString created:" + postBody);
-
     // redirectUrl is added as code by app custom action in register.js
     // redirectUrl has already host & app Url & action params
     window.open(redirectUrl + '&' + postBody, '_blank');
-    // HERE we must return a fake 'ok' response
-    // we won't allow this original send
-    // xhr.oldSend(postBody); 	
+    xhr.onreadystatechange();
 };
-XMLHttpRequest.prototype.send = newSend;
 
 function buildQueryString(str, param, val) {
     var ind = -1, attached = '',
