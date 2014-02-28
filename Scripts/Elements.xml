@@ -3,10 +3,22 @@
   <Module Name="Scripts">
     <File Path="Scripts\App.js" Url="Scripts/App.js" ReplaceContent="TRUE" />
     <File Path="Scripts\lightLMS_commons.js" Url="Scripts/lightLMS_commons.js" ReplaceContent="TRUE" />
-    <File Path="Scripts\spyreqs.js" Url="Scripts/spyreqs.js" ReplaceContent="TRUE" />
     <File Path="Scripts\WP_App.js" Url="Scripts/WP_App.js" ReplaceContent="TRUE" />
     <File Path="Scripts\_references.js" Url="Scripts/_references.js" ReplaceContent="TRUE" />
-    <File Path="Scripts\register.js" Url="Scripts/register.js" ReplaceContent="TRUE" />
-    <File Path="Scripts\cancelXhr.txt" Url="Scripts/cancelXhr.txt" ReplaceContent="TRUE" />
+    <File Path="Scripts\iSpring\register.js" Url="Scripts/iSpring/register.js" ReplaceContent="TRUE" />
+    <File Path="Scripts\iSpring\cancelXhr.txt" Url="Scripts/iSpring/cancelXhr.txt" ReplaceContent="TRUE" />
+    <File Path="Scripts\Scorm\API.js" Url="Scripts/Scorm/API.js" ReplaceContent="TRUE" />
+    <File Path="Scripts\Scorm\API_1484_11.js" Url="Scripts/Scorm/API_1484_11.js" ReplaceContent="TRUE" />
+    <File Path="Scripts\Scorm\API_BASE.js" Url="Scripts/Scorm/API_BASE.js" ReplaceContent="TRUE" />
+    <File Path="Scripts\Scorm\Controls.js" Url="Scripts/Scorm/Controls.js" ReplaceContent="TRUE" />
+    <File Path="Scripts\Scorm\inEduLightScoPlayer.js" Url="Scripts/Scorm/inEduLightScoPlayer.js" ReplaceContent="TRUE" />
+    <File Path="Scripts\Scorm\json2.js" Url="Scripts/Scorm/json2.js" ReplaceContent="TRUE" />
+    <File Path="Scripts\Scorm\LocalStorage.js" Url="Scripts/Scorm/LocalStorage.js" ReplaceContent="TRUE" />
+    <File Path="Scripts\Scorm\player.html" Url="Scripts/Scorm/player.html" ReplaceContent="TRUE" />
+    <File Path="Scripts\Scorm\Player.js" Url="Scripts/Scorm/Player.js" ReplaceContent="TRUE" />
+    <File Path="Scripts\Scorm\RemoteLightPlayer.js" Url="Scripts/Scorm/RemoteLightPlayer.js" ReplaceContent="TRUE" />
+    <File Path="Scripts\Scorm\sscompat.js" Url="Scripts/Scorm/sscompat.js" ReplaceContent="TRUE" />
+    <File Path="Scripts\Scorm\sscorlib.js" Url="Scripts/Scorm/sscorlib.js" ReplaceContent="TRUE" />
+    <File Path="Scripts\Scorm\ssfx.Core.js" Url="Scripts/Scorm/ssfx.Core.js" ReplaceContent="TRUE" />
   </Module>
 </Elements>

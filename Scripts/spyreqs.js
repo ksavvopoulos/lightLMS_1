@@ -172,6 +172,26 @@
         return null;
     }
 
+    function buildQueryString(str, param, val) {
+        // function returns string with str parameters plus the given parameter. works even param already exists in str
+        var ind = str.indexOf('?');
+        if (ind > -1) {
+            var param_array = str.substring(ind + 1).split('&');
+            var params = {};
+            var theLength = param_array.length;
+            for (var i = 0; i < theLength; i++) {
+                var x = param_array[i].toString().split('=');
+                params[x[0]] = x[1];
+            }
+            params[param] = val;
+            var attached = "?";
+            for (var key in params) {
+                attached += key + "=" + params[key] + "&";
+            } attached = attached.substr(0, attached.length - 1);
+            return String(str.substr(0, ind) + attached);
+        } return String(str + "?" + param + "=" + val);
+    }
+
     queryParams = urlParamsObj();
     appUrl = decodeURIComponent(queryParams.SPAppWebUrl);
     if (appUrl.indexOf('#') !== -1) { appUrl = appUrl.split('#')[0]; }
@@ -363,7 +383,17 @@
             /**
              * updates an item in a Host List
              * @param  {string} listTitle [the title of the Host List]
-             * @param  {object} item      [the item to update. Must have the properties Id and __metadata]
+             * @param  {object} item      [the item to update. Must have the properties Id and __metadata]       
+             * var item = {
+             *   "__metadata": {
+             *       type: "SP.Data.DemodemoListItem",//prepei na breis gia th lista to sygkekrimeno type
+             *       etag:""//optional
+             *   },
+             *   Id:".."//guid ypoxrewtiko
+             *   //ola ta columns pou 8es na allakseis
+             *   Title: "item",
+             *   NotEditable:"edited"
+            * };
              */
             updateHostListItem: function (listTitle, item) {
                 var url = baseUrl + "web/lists/getByTitle('" + listTitle + "')/Items(" + item.Id + ")?" + targetStr;
@@ -373,6 +403,17 @@
                 var url = appUrl + "/_api/web/lists/getByTitle('" + listTitle + "')/Items(" + item.Id + ")?";
                 return updateAsync(url, item);
             },
+            /* updateHostListField field object example
+            *    var field = {
+		    *        ReadOnly:false,
+		    *        // more properties here
+		    *        Id:"...", // this is the fields guid, requiered
+		    *        __metadata:{
+			*            type:"SP.Field" // requiered
+			*            // may add etag 
+		    *        }
+	        *   };
+            */
             updateHostListField: function (listTitle, field) {
                 var url = baseUrl + "web/lists/getByTitle('" + listTitle + "')/Fields(guid'" + field.Id + "')?" + targetStr;
                 return updateAsync(url, field);
@@ -531,19 +572,13 @@
 						"template" : "genericList",
 						"description" : "this is a list", 
 							fields : [	 
-								{"Name":"userId", "Type":"Text", "Required":"true"},
-								{"Name":"testId", "Type":"Text", "Required":"True"},	
-								{"Name":"courseId", "Type":"Text"}, 
-								{"Name":"periodId", "Type":"Text"},
+								{"Name":"userId", "Type":"Text", "Required":"true"},								
 								{"Name":"score", "Type":"Number"}, 
 								{"Name":"scoreFinal", "Type":"Number", "hidden":"true"},
 								{"Name":"assginedTo", "Type":"User", "Required":"true"},
-								{"Name":"dateAssgined", "Type":"DateTime"},
-								{"Name":"dateEnded", "Type":"DateTime"},
-								{"Name":"canRetry", "Type":"Boolean"},
+								{"Name":"dateAssgined", "Type":"DateTime"},								
 								{"Name":"state", "Type":"Choice", "choices" : ["rejected", "approved", "passed", "proggress"]},
-								{"Name":"comments", "Type":"Note"},
-								{"Name":"assginedFrom", "Type":"User"},
+								{"Name":"comments", "Type":"Note"},								
 								{"Name":"testLink", "Type":"URL"}
 							]	 
 						})
@@ -638,6 +673,7 @@
         },
         utils: {
             urlParamsObj: urlParamsObj,
+            buildQueryString : buildQueryString,
             say: say
         }
     };

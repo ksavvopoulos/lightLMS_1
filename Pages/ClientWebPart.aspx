@@ -44,7 +44,7 @@
 		</script>
 		
 		<!-- Common LMS JavaScript functions -->
-		<script type="text/javascript" src="../Scripts/spyreqs.js"></script>
+		<script type="text/javascript" src="https://raw.github.com/ksavvopoulos/javascript-collection/master/spyreqs.js"></script>
 		<script type="text/javascript" src="../Scripts/lightLMS_commons.js"></script>
 		
 		<!-- LMS Application JavaScript -->

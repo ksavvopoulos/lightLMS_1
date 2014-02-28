@@ -1,10 +1,11 @@
 ﻿
-(function () {
-    'use strict';
-    var context = SP.ClientContext.get_current(),
-        user = context.get_web().get_currentUser(),
-        userName, userId;
+'use strict';
+// let these public for future use
+var user, userName, userId;
 
+(function () {  
+
+    var context = SP.ClientContext.get_current();
 	// This code runs when the DOM is ready and creates a context object which is 
 	// needed to use the SharePoint object model
 	$(document).ready(function () {
@@ -14,6 +15,7 @@
 	// This function prepares, loads, and then executes a SharePoint query to get 
 	// the current users information
 	function getUserNameAndInit() {
+	    user = context.get_web().get_currentUser();
 		context.load(user);
 		context.executeQueryAsync(onGetUserNameSuccess, onGetUserNameFail);
 	}

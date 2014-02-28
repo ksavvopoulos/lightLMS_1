@@ -2,15 +2,15 @@
 var spyreqs = spyreqs || {},
 	say = spyreqs.utils.say,
 	urlParamsObj = spyreqs.utils.urlParamsObj,
-	$mes = $('#message');
+    buildQueryString = spyreqs.utils.buildQueryString;
 
 // common app properties ------------------------------------------------------------------------------
 var app_Name = "lightLMS",
-	app_MainListName = "lightLMS_tasks",
-	app_Div = "#lightLMS_div",
-	app_CustomAction_RegisterFolder = "lightLMS_RegisterFolder",
-	app_KeepListWithin = false;
-	
+    app_Version = "0.0.1",
+	app_MainListName = "lightLMS_tasks",	
+    $app_Message = $("#message"),
+    $app_Div = $("#lightLMS_div");
+
 // common vars ----------------------------------------------------------------------------------------
 var clientContext = null, theWeb = null, theList = null,
 	hostUrl, appUrl, queryParams, action,
@@ -19,8 +19,8 @@ var clientContext = null, theWeb = null, theList = null,
 
 // common functions -----------------------------------------------------------------------------------
 function initApp () {
-	// it gets here on DOM ready
-		
+    // it gets here on DOM ready 
+
 	if (typeof GetUrlKeyValue == 'function') {
 		hostUrl = GetUrlKeyValue("SPHostUrl");
 		appUrl = GetUrlKeyValue("SPAppWebUrl");
@@ -45,12 +45,22 @@ function initApp () {
 			    // now we have all the params, do jobs!
 			    if (action === "rf_ispr") {
 			        // Register File iSpring (rf_ispr)
-			        $mes.text('Please wait while registering iSpring... ');
-			        $.getScript("../Scripts/register.js");
+			        say('Please wait while registering iSpring... ');
+			        $app_Message.text('Please wait while registering iSpring... ');
+			        $.getScript("../Scripts/iSpring/register.js");
+			    }
+			    if (action === "rf_sco") {
+			        // Register File Scorm (rf_sco)
+			        $app_Message.text('Please wait while registering Scorm... ');
+			        $.getScript("../Scripts/Scorm/register.js");
 			    }
 			    else if (action === "sd_ispr") {
 			        // Save Data from iSpring quiz (sd_ispr)
 			        saveIspring();
+			    }
+			    else if (action === "sd_sco") {
+			        // Save Data from iSpring quiz (sd_sco)
+			        saveScorm();
 			    }
 			    else if (action === "st") {
 			        // Show Tasks (st)					
@@ -80,6 +90,7 @@ function saveIspring() {
 		se	Quiztaker's email address
 		qt	Quiz title
 	*/
+    $app_Message.text("Please wait while saving your score...")
 	say("data to save: " + queryParams.qt + " " + userId + " " + userName + "score:" + queryParams.tp);
 	spyreqs.jsom.addHostListItem(app_MainListName, {
 			"Title":queryParams.qt, 
@@ -94,6 +105,10 @@ function saveIspring() {
     );
 }
 
+function saveScorm() {
+    say("saveScorm called ");
+}
+
 function checkHostListExistsOrCreate (listName, createFn, okFn, errFn){
 	var listObj = { "Title":listName };
 			
@@ -102,6 +117,7 @@ function checkHostListExistsOrCreate (listName, createFn, okFn, errFn){
 		{
 			if (listExistsBool) { okFn(); }
 			else {
+			    $app_Message.text('Please wait while creating list... ');
 				say ("creating list: " + listName);
 				createFn(okFn, errFn);
 			}					
@@ -119,30 +135,31 @@ function buildAppList(okFn, errFn){
 		"url":app_MainListName, 
 		"template" : "genericList",
 		"description" : "this is a list", 
-			fields : [	 
-				{"Name":"testId", "Type":"Text", "Required":"True"},	
-				{"Name":"userId", "Type":"Text", "Required":"Τrue"},				 
-				{"Name":"userName", "Type":"Text"},				
-				{"Name":"courseId", "Type":"Text"},
-				{"Name":"periodId", "Type":"Text"},				
-				{"Name":"assginedFrom", "Type":"User"},
-				{"Name":"assignedTo", "Type":"User"},
-				{"Name":"dateAssigned", "Type":"DateTime"},
-				{"Name":"dateDue", "Type":"DateTime"},
-				{"Name":"dateLastTried", "Type":"DateTime"},
-				{"Name":"canRetry", "Type":"Boolean"},
-				{"Name":"state", "Type":"Choice", "choices" : ["rejected", "approved", "passed", "proggress"]},
-				{"Name":"score", "Type":"Number"},
-				{"Name":"passingScore", "Type":"Number"},
-				{"Name":"maxScore", "Type":"Number"},
-				{"Name":"testLink", "Type":"URL"},
-				{"Name":"comments", "Type":"Note"},
-				{"Name":"extraField_1", "Type":"Text", "Hidden":"True"},
-				{"Name":"extraField_2", "Type":"Text", "Hidden":"True"},
-				{"Name":"extraField_3", "Type":"Text", "Hidden":"True"},
-				{"Name":"extraField_4", "Type":"Text", "Hidden":"True"},
-				{"Name":"extraField_5", "Type":"Text", "Hidden":"True"},
-				{"Name":"extraField_6", "Type":"Text", "Hidden":"True"}
+		fields: [
+                { "Name": "userId", "Type": "Text", "Required": "Τrue" },
+				{ "Name": "testId", "Type": "Text" },
+                { "Name": "testTemplateId", "Type": "Text" },				
+				{ "Name": "userName", "Type": "Text" },
+				{ "Name": "courseId", "Type": "Text" },
+				{ "Name": "periodId", "Type": "Text" },
+				{ "Name": "assignedFrom", "Type": "User" },
+				{ "Name": "assignedTo", "Type": "User" },
+				{ "Name": "dateAssigned", "Type": "DateTime" },
+				{ "Name": "dateDue", "Type": "DateTime" },
+				{ "Name": "dateLastTried", "Type": "DateTime" },
+				{ "Name": "canRetry", "Type": "Boolean" },
+				{ "Name": "state", "Type": "Choice", "choices": ["rejected", "approved", "passed", "proggress", "registered"] },
+				{ "Name": "score", "Type": "Number" },
+				{ "Name": "passingScore", "Type": "Number" },
+				{ "Name": "maxScore", "Type": "Number" },
+				{ "Name": "testLink", "Type": "URL" },
+				{ "Name": "comments", "Type": "Note" },
+				{ "Name": "extraField_1", "Type": "Text", "Hidden": "True" },
+				{ "Name": "extraField_2", "Type": "Text", "Hidden": "True" },
+				{ "Name": "extraField_3", "Type": "Text", "Hidden": "True" },
+				{ "Name": "extraField_4", "Type": "Text", "Hidden": "True" },
+				{ "Name": "extraField_5", "Type": "Text", "Hidden": "True" },
+				{ "Name": "extraField_6", "Type": "Text", "Hidden": "True" }
 			]	 
 		})
 	.then(                    
@@ -153,25 +170,6 @@ function buildAppList(okFn, errFn){
 
 
 // ----------------------------------- Generic functions ----------------------------------------------------------- 
-function buildUrlParamsString(str, param, val) { 
-	// function returns string with str parameters plus the given parameter. works even param already exists in str
-    var ind=str.indexOf('?');
-    if (ind>-1) {
-        var param_array = str.substring(ind+1).split('&');
-        var params = {};
-        var theLength = param_array.length;
-        for (var i = 0; i < theLength; i++) {
-            var x = param_array[i].toString().split('=');
-            params[x[0]] = x[1];
-        } 
-        params[param]=val;
-        var attached = "?";
-        for (var key in params) {
-            attached += key + "=" + params[key] + "&";
-        } attached = attached.substr(0,attached.length-1);
-        return String(str.substr(0,ind) + attached);
-    } return String(str+"?"+param+"="+val);    
-}
 
 function onQueryFailed_Generic(sender, args) {  
 	alert('Sorry, query failed: ' + args.get_message() + '\nstackTrace: ' + args.get_stackTrace());  

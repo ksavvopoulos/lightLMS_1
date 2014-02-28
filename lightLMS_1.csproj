@@ -20,6 +20,7 @@
     <CspkgPartId>{b381fa8d-a3dd-498a-8caf-8bc5f110d370}</CspkgPartId>
     <SqlPackagePartId>{49ca3b02-3aa7-4da1-8666-26805d288cef}</SqlPackagePartId>
     <ActiveDeploymentConfiguration>Deploy App for SharePoint</ActiveDeploymentConfiguration>
+    <ActivePublishProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -57,7 +58,7 @@
     <None Include="Pages\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{ceb21f0c-5f5f-4098-b618-332425d3da26}</SharePointProjectItemId>
     </None>
-    <None Include="Register_iSpring\SharePointProjectItem.spdata">
+    <None Include="CustomActions\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{2ee42d22-a3e0-42d9-905d-b999f6b71e92}</SharePointProjectItemId>
     </None>
     <None Include="Scripts\SharePointProjectItem.spdata">
@@ -66,11 +67,10 @@
     <Content Include="Content\Elements.xml" />
     <Content Include="Images\Elements.xml" />
     <Content Include="Pages\Elements.xml" />
-    <Content Include="Pages\Register.aspx" />
-    <Content Include="Register_iSpring\Elements.xml">
+    <Content Include="CustomActions\Elements.xml">
       <OpcRelationship>feature-elementmanifest</OpcRelationship>
     </Content>
-    <Content Include="Scripts\cancelXhr.txt" />
+    <Content Include="Scripts\iSpring\cancelXhr.txt" />
     <Content Include="Scripts\Elements.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -82,8 +82,20 @@
     <Content Include="Pages\Default.aspx" />
     <Content Include="Scripts\App.js" />
     <Content Include="Scripts\lightLMS_commons.js" />
-    <Content Include="Scripts\register.js" />
-    <Content Include="Scripts\spyreqs.js" />
+    <Content Include="Scripts\iSpring\register.js" />
+    <Content Include="Scripts\Scorm\API.js" />
+    <Content Include="Scripts\Scorm\API_1484_11.js" />
+    <Content Include="Scripts\Scorm\API_BASE.js" />
+    <Content Include="Scripts\Scorm\Controls.js" />
+    <Content Include="Scripts\Scorm\inEduLightScoPlayer.js" />
+    <Content Include="Scripts\Scorm\json2.js" />
+    <Content Include="Scripts\Scorm\LocalStorage.js" />
+    <Content Include="Scripts\Scorm\player.html" />
+    <Content Include="Scripts\Scorm\Player.js" />
+    <Content Include="Scripts\Scorm\RemoteLightPlayer.js" />
+    <Content Include="Scripts\Scorm\sscompat.js" />
+    <Content Include="Scripts\Scorm\sscorlib.js" />
+    <Content Include="Scripts\Scorm\ssfx.Core.js" />
     <Content Include="Scripts\WP_App.js" />
     <Content Include="Scripts\_references.js" />
   </ItemGroup>
@@ -106,6 +118,7 @@
       <SubType>Designer</SubType>
     </AppManifestFile>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

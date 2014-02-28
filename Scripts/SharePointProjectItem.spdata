@@ -3,11 +3,23 @@
   <Files>
     <ProjectItemFile Source="App.js" Target="Scripts\" Type="ElementFile" />
     <ProjectItemFile Source="lightLMS_commons.js" Target="Scripts\" Type="ElementFile" />
-    <ProjectItemFile Source="spyreqs.js" Target="Scripts\" Type="ElementFile" />
     <ProjectItemFile Source="WP_App.js" Target="Scripts\" Type="ElementFile" />
     <ProjectItemFile Source="_references.js" Target="Scripts\" Type="ElementFile" />
     <ProjectItemFile Source="Elements.xml" Target="Scripts\" Type="ElementManifest" />
-    <ProjectItemFile Source="register.js" Target="Scripts\" Type="ElementFile" />
-    <ProjectItemFile Source="cancelXhr.txt" Target="Scripts\" Type="ElementFile" />
+    <ProjectItemFile Source="iSpring\register.js" Target="Scripts\iSpring\" Type="ElementFile" />
+    <ProjectItemFile Source="iSpring\cancelXhr.txt" Target="Scripts\iSpring\" Type="ElementFile" />
+    <ProjectItemFile Source="Scorm\API.js" Target="Scripts\Scorm\" Type="ElementFile" />
+    <ProjectItemFile Source="Scorm\API_1484_11.js" Target="Scripts\Scorm\" Type="ElementFile" />
+    <ProjectItemFile Source="Scorm\API_BASE.js" Target="Scripts\Scorm\" Type="ElementFile" />
+    <ProjectItemFile Source="Scorm\Controls.js" Target="Scripts\Scorm\" Type="ElementFile" />
+    <ProjectItemFile Source="Scorm\inEduLightScoPlayer.js" Target="Scripts\Scorm\" Type="ElementFile" />
+    <ProjectItemFile Source="Scorm\json2.js" Target="Scripts\Scorm\" Type="ElementFile" />
+    <ProjectItemFile Source="Scorm\LocalStorage.js" Target="Scripts\Scorm\" Type="ElementFile" />
+    <ProjectItemFile Source="Scorm\player.html" Target="Scripts\Scorm\" Type="ElementFile" />
+    <ProjectItemFile Source="Scorm\Player.js" Target="Scripts\Scorm\" Type="ElementFile" />
+    <ProjectItemFile Source="Scorm\RemoteLightPlayer.js" Target="Scripts\Scorm\" Type="ElementFile" />
+    <ProjectItemFile Source="Scorm\sscompat.js" Target="Scripts\Scorm\" Type="ElementFile" />
+    <ProjectItemFile Source="Scorm\sscorlib.js" Target="Scripts\Scorm\" Type="ElementFile" />
+    <ProjectItemFile Source="Scorm\ssfx.Core.js" Target="Scripts\Scorm\" Type="ElementFile" />
   </Files>
 </ProjectItem>

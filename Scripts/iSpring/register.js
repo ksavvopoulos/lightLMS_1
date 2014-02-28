@@ -9,7 +9,7 @@
         var folderName = fileName.split('/');
         return folderName.splice(0, folderName.length - 1).join('/');
     }
-
+    
     function buildAppUrlScript() {
         var oldUrlStr, newUrlStr, fileNameOnUrl;
         // get current url without params
@@ -35,19 +35,33 @@
        * We have the code from the js file, now we built the url to be redirected when user finishes the quiz
        * The code in cancelXhrCode will redirect the iSpring quiz to the url returned from buildAppUrlScript()
     */
-    $.when(getFile(itemUrl), $.get("../Scripts/cancelXhr.txt")).done(function (data, scriptData) {
+    $.when(getFile(itemUrl), $.get("../Scripts/iSpring/cancelXhr.txt")).done(function (data, scriptData) {
         var fileName = "start.aspx",
             folderName = getFolderName(itemUrl),
             appUrlScript = buildAppUrlScript(),
             cancelXhrScript = scriptData[0];
-
+       
         say("appUrlScript = " + appUrlScript);
-        say("cancelXhrScript = " + cancelXhrScript);
+        // say("cancelXhrScript = " + cancelXhrScript);
 
         data = data.replace("</body>", "<script>" + appUrlScript + cancelXhrScript + "</script></body>");
 
         addFile(folderName, fileName, data).done(function () {
-            $('#message').text('iSpring registered');
+            // SOS $app_Message is not defined!!!
+            $("#message").text('Please wait while updating list...');
+            spyreqs.jsom.addHostListItem(app_MainListName,
+                {
+                    "userId": userId,
+                    "assignedFrom": userId + ';#' + userName,
+                    "state": "registered",
+                    "testLink": folderName + "/" + fileName
+                }).then(
+                function (itemId) { $("#message").text('Registration completed!'); },
+                function (error) {
+                    $("#message").text('Sorry, registration failed.');
+                    say('addRegistrationRecord request failed. ' + error.args.get_message() + '\n' + error.args.get_stackTrace());
+                }
+            );
         });
     });    
 

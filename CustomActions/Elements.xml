@@ -13,4 +13,18 @@
     -->
     <UrlAction Url="~appWebUrl/Pages/Default.aspx?{StandardTokens}&amp;SPListItemId={ItemId}&amp;SPListId={ListId}&amp;ItemUrl={ItemUrl}&amp;action=rf_ispr" />
   </CustomAction>
+  
+  <CustomAction Id="A78FD3F6-6ACA-4511-9F15-DADE857FC2D8.Register_Scorm"
+                RegistrationType="FileType"
+                RegistrationId="html"
+                Location="EditControlBlock"
+                Sequence="10002"
+                Title="Register Scorm">
+    <!-- 
+    Update the Url below to the page you want the custom action to use.
+    Start the URL with the token ~remoteAppUrl if the page is in the
+    associated web project, use ~appWebUrl if page is in the app project.
+    -->
+    <UrlAction Url="~appWebUrl/Pages/Default.aspx?{StandardTokens}&amp;SPListItemId={ItemId}&amp;SPListId={ListId}&amp;ItemUrl={ItemUrl}&amp;action=rf_sco" />
+  </CustomAction>
 </Elements>
