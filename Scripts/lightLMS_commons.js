@@ -8,8 +8,8 @@ var spyreqs = spyreqs || {},
 var app_Name = "lightLMS",
     app_Version = "0.0.1",
 	app_MainListName = "lightLMS_tasks",	
-    $app_Message = $("#message"),
-    $app_Div = $("#lightLMS_div");
+    $app_Message,
+    $app_Div;
 
 // common vars ----------------------------------------------------------------------------------------
 var clientContext = null, theWeb = null, theList = null,
@@ -20,6 +20,9 @@ var clientContext = null, theWeb = null, theList = null,
 // common functions -----------------------------------------------------------------------------------
 function initApp () {
     // it gets here on DOM ready 
+    //so it is safe to query the DOM
+    $app_Message = $("#message");
+    $app_Div = $("#lightLMS_div");
 
 	if (typeof GetUrlKeyValue == 'function') {
 		hostUrl = GetUrlKeyValue("SPHostUrl");

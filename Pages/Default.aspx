@@ -15,7 +15,7 @@
 	<link rel="Stylesheet" type="text/css" href="../Content/App.css" />
 			
 	<!-- Common LMS JavaScript functions -->
-	<script type="text/javascript" src="https://raw.github.com/ksavvopoulos/javascript-collection/master/spyreqs.js"></script>
+	<script type="text/javascript" src="https://rawgithub.com/ksavvopoulos/javascript-collection/master/spyreqs.js"></script>
 	<script type="text/javascript" src="../Scripts/lightLMS_commons.js"></script>
 	<!-- LMS Application JavaScript -->
 	<script type="text/javascript" src="../Scripts/App.js"></script>
