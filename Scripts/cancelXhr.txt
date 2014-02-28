@@ -18,7 +18,7 @@ XMLHttpRequest.prototype.send = function (postBody) {
     // redirectUrl is added as code by app custom action in register.js
     // redirectUrl has already host & app Url & action params
     window.open(redirectUrl + '&' + postBody, '_blank');
-    xhr.onreadystatechange();
+    setTimeout(xhr.onreadystatechange,200);
 };
 
 function buildQueryString(str, param, val) {

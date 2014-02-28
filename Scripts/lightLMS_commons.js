@@ -1,7 +1,8 @@
 ﻿// define scope methods -------------------------------------------------------------------------------
 var spyreqs = spyreqs || {},
 	say = spyreqs.utils.say,
-	urlParamsObj = spyreqs.utils.urlParamsObj;
+	urlParamsObj = spyreqs.utils.urlParamsObj,
+	$mes = $('#message');
 
 // common app properties ------------------------------------------------------------------------------
 var app_Name = "lightLMS",
@@ -38,24 +39,25 @@ function initApp () {
 		function() { 
 			say("app list is created or ready");
 			if (action.length > 0) {
-				// we have an action. queryParams is undefined if GetUrlKeyValue was found. 
-				// but now we need it, so...
-				if (queryParams === undefined) { queryParams = urlParamsObj(); }
-				// now we have all the params, do jobs!
-				if (action === "rf_ispr"){
-					// Register File iSpring (rf_ispr)
-					// something went wrong, for iSpring register we have th register.aspx
-				}
-				else if (action === "sd_ispr"){
-					// Save Data from iSpring quiz (sd_ispr)
-					saveIspring();
-				}
-				else if (action === "st"){
-					// Show Tasks (st)					
-				}
-				else if (action === "at"){
-					// Assign Tasks (at)					
-				}				
+			    // we have an action. queryParams is undefined if GetUrlKeyValue was found. 
+			    // but now we need it, so...
+			    if (queryParams === undefined) { queryParams = urlParamsObj(); }
+			    // now we have all the params, do jobs!
+			    if (action === "rf_ispr") {
+			        // Register File iSpring (rf_ispr)
+			        $mes.text('Please wait while registering iSpring... ');
+			        $.getScript("../Scripts/register.js");
+			    }
+			    else if (action === "sd_ispr") {
+			        // Save Data from iSpring quiz (sd_ispr)
+			        saveIspring();
+			    }
+			    else if (action === "st") {
+			        // Show Tasks (st)					
+			    }
+			    else if (action === "at") {
+			        // Assign Tasks (at)					
+			    }
 			}
 		}, 
 		function() { alert ("something went wrong creating list: " + app_MainListName ); }		

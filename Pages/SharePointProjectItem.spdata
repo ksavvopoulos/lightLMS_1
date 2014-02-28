@@ -4,6 +4,5 @@
     <ProjectItemFile Source="ClientWebPart.aspx" Target="Pages\" Type="ElementFile" />
     <ProjectItemFile Source="Default.aspx" Target="Pages\" Type="ElementFile" />
     <ProjectItemFile Source="Elements.xml" Target="Pages\" Type="ElementManifest" />
-    <ProjectItemFile Source="Register.aspx" Target="Pages\" Type="ElementFile" />
   </Files>
 </ProjectItem>
