@@ -1,11 +1,11 @@
 function XMLHttpRequest(){
     this.status = 200;
     this.readyState = 4;
-    this.open=function(){};
-    this.onreadystatechange=function(){};
+    this.open = function(){};
+    this.onreadystatechange = function(){};
 	this.responseText = "";
 	this.response = "";
-	this.setRequestHeader=function(){};
+	this.setRequestHeader = function(){};
 	this.statusText = "200 OK";
 }
 
