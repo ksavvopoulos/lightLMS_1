@@ -5,15 +5,9 @@
         addFile = spyreqs.rest.addHostFile,
         itemUrl = decodeURIComponent(queryParams.ItemUrl);
 
-    function getFolderName(str) {
-        var folder = str.split('/'),
-            folderNameArray = [],
-            i, len;
-
-        for (i = 0, len = folder.length - 1; i < len; i++) {
-            folderNameArray.push(folder[i]);
-        }
-        return folderNameArray.join('/');
+    function getFolderName(fileName) {
+        var folderName = fileName.split('/');
+        return folderName.splice(0, folderName.length - 1).join('/');
     }
 
     function buildAppUrlScript() {
